@@ -14,8 +14,6 @@ export const metadata: Metadata = {
   description: "Modern ecommerce store with the best products at great prices",
   generator: "v0.app",
   manifest: "/manifest.json",
-  themeColor: "#15803d",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -24,6 +22,13 @@ export const metadata: Metadata = {
   other: {
     "mobile-web-app-capable": "yes",
   },
+}
+
+export const viewport = {
+  themeColor: "#15803d",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
