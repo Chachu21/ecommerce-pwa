@@ -1,13 +1,13 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
-import { Analytics } from "@vercel/analytics/next"
-import { CartProvider } from "@/lib/cart-context"
-import { PWAInstallPrompt } from "@/components/pwa-install-prompt"
-import { OfflineIndicator } from "@/components/offline-indicator"
-import { Suspense } from "react"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import { CartProvider } from "@/lib/cart-context";
+import { PWAInstallPrompt } from "@/components/pwa-install-prompt";
+import { OfflineIndicator } from "@/components/offline-indicator";
+import { Suspense } from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ShopEasy - Your Online Store",
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
   other: {
     "mobile-web-app-capable": "yes",
   },
-}
+};
 
 export const viewport = {
   themeColor: "#15803d",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -56,7 +56,10 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              if ('serviceWorker' in navigator) {
+              function isMobileDevice() {
+                return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+              }
+              if ('serviceWorker' in navigator && isMobileDevice()) {
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
@@ -72,5 +75,5 @@ export default function RootLayout({
         />
       </body>
     </html>
-  )
+  );
 }
