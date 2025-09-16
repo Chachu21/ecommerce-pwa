@@ -1,9 +1,9 @@
 {
-  "name": "",
+  "name": "ShopEasy - Your Online Store",
   "short_name": "ShopEasy",
   "description": "Modern ecommerce store with the best products at great prices",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#ffffff",
   "theme_color": "#15803d",
   "orientation": "portrait-primary",
@@ -23,5 +23,7 @@
   ],
   "categories": ["shopping", "business"],
   "lang": "en",
-  "dir": "ltr"
+  "dir": "ltr",
+  "display_override": ["fullscreen", "standalone"],
+  "prefer_related_applications": false
 }
