@@ -10,7 +10,7 @@ import { Suspense } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ShopEasy - Your Online Store",
+  title: "",
   description: "Modern ecommerce store with the best products at great prices",
   generator: "v0.app",
   manifest: "/manifest.json",
