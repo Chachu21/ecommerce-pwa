@@ -59,8 +59,39 @@ export default function RootLayout({
               function isMobileDevice() {
                 return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
               }
+              
+              function getAndroidVersion() {
+                const ua = navigator.userAgent;
+                const match = ua.match(/Android\\s([0-9\\.]*)/);
+                return match ? parseFloat(match[1]) : null;
+              }
+              
+              function hideAppNameForOldAndroid() {
+                const androidVersion = getAndroidVersion();
+                if (androidVersion && androidVersion < 12) {
+                  fetch('/manifest.json')
+                    .then(response => response.json())
+                    .then(manifest => {
+                      manifest.short_name = " ";
+                      manifest.name = " ";
+                      
+                      const manifestBlob = new Blob([JSON.stringify(manifest)], {
+                        type: 'application/json'
+                      });
+                      const manifestURL = URL.createObjectURL(manifestBlob);
+                      
+                      const manifestLink = document.querySelector('link[rel="manifest"]');
+                      if (manifestLink) {
+                        manifestLink.href = manifestURL;
+                      }
+                    })
+                    .catch(console.error);
+                }
+              }
+              
               if ('serviceWorker' in navigator && isMobileDevice()) {
                 window.addEventListener('load', function() {
+                  hideAppNameForOldAndroid();
                   navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
                       console.log('SW registered: ', registration);
